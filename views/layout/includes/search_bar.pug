@@ -1,0 +1,7 @@
+div(class="bg-sky-800 py-5")
+    div(class="container mx-auto flex lg:justify-end justify-center")
+        form(action="/filter/results" method="get" class="flex gap-3 items-center ")
+            label(for="kwordh" class="text-sm uppercase font-bold text-white hidden lg:block") Search
+            input(type="text" id="kwordh" name="kwordh" placeholder="The Last Of Us" class="p-2 rounded-lg shadow")
+
+            input(type="submit" class="bg-white rounded-lg text-sky-800 uppercase font-bold p-2 hover:bg-neutral-100 cursor-pointer text-sm" value="Search")

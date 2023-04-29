@@ -1,0 +1,33 @@
+extends ../layout/public
+
+
+block content
+    div(class=`flex justify-center p-2 flex-wrap animate__animated animate__fadeIn animate__faster ${content? 'h-full': 'h-screen items-center'}`)
+        if content
+            div(class="w-full flex justify-center flex-wrap lg:mt-6 mt-2")
+                div(class="w-full")
+                    h2(class="uppercase text-xl font-bold text-center") Videogames
+                div(class="w-full flex justify-center lg:justify-around mt-8")
+                    each videogame in videogames 
+                        div(class="m-2 w-5/12 lg:w-2/12 transform hover:translate-y-[-7px] transition duration-300")
+                            a(
+                                href=`/articles/videogame/${videogame.id}`)
+                                img(
+                                    class="rounded-md"
+                                    src= `/uploads/${videogame.image}`
+                                )
+                                div(class="w-full flex justify-center mt-3")
+                                    h3(class="font-bold uppercase text-sky-500")= videogame.name
+            div(class="px-4 py-3 flex items-center justify-center lg:bottom-5 absolute bottom-0 w-full")
+                div(class="flex-1 flex justify-center sm:hidden")
+                    a(href=`/videogames/category/${categoryId}?page=${currentPage - 1}` class=`${currentPage == 0 ? 'pointer-events-none' : ''} relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 mx-1`) Previous
+                    a(href=`/videogames/category/${categoryId}?page=${currentPage + 1}` class=`${currentPage + 1 == totalPages ? 'pointer-events-none' : ''} relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 mx-1`) Next
+                div(class="hidden sm:block") 
+                    nav(class="relative z-0 inline-flex rounded-md shadow-md")
+                        - var n = 1;
+                            while n <= totalPages 
+                                a(href=`/videogames/category/${categoryId}?page=${n - 1}` class=`${currentPage == n - 1 ? 'bg-sky-50 border-sky-500 text-sky-600 pointer-events-none' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'}relative nline-flex items-center px-4 py-2 border text-sm font-medium`) #{n++}
+        else 
+            div(class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert")
+                p(class="text-center font-bold") No matches 
+                p(class="text-sm") No videogames found for this category

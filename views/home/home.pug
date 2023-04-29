@@ -1,0 +1,82 @@
+extends ../layout/public
+
+block content
+    div(class="container mx-auto flex flex-wrap justify-center xl:justify-between py-2")
+        div(class="w-full max-w-[1400px] mx-auto flex flex-wrap")
+            div(class="w-full flex justify-center")
+                h2(class="text-2xl uppercase font-extrabold text-sky-800") Popular categories
+            div(class="w-full flex mt-3 flex-wrap justify-center lg:justify-between")
+                each category in popularCategories
+                    div(class="w-full md:w-1/2 lg:w-4/12 xl:w-3/12 flex rounded-lg shadow-md bg-white flex-wrap m-3")
+                        div(class="mb-3 w-full")
+                            img(
+                                src=`/uploads/${category.cover_image}`
+                                alt=`Category ${category.title}`
+                                class="w-full"
+                            )
+                        div(class="p-3 text-left w-full")
+                            h3
+                                a(
+                                    href=`/videogames/category/${category.id}`
+                                    class="text-dark hover:text-primary mb-2 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px] text-sky-500"
+                                )= category.title
+                        div(class="flex justify-center p-3 w-full")
+                            p= `${category.description.length > 100 ? category.description.slice(0,100)+'...' : category.description}`
+    div(class="container mx-auto flex flex-wrap justify-center xl:justify-between py-2")
+        div(class="w-full max-w-[1400px] mx-auto flex flex-wrap")
+            div(class="w-full flex justify-center my-4")
+                h2(class="text-2xl uppercase font-extrabold text-sky-800") Last Articles added
+            div(class="w-full flex mt-3 flex-wrap justify-center lg:justify-between")
+                each article in recentArticles
+                    div(class="w-full md:w-1/2 lg:w-4/12 xl:w-3/12 flex rounded-lg shadow-md bg-white flex-wrap m-3")
+                        div(class="mb-3 w-full")
+                            img(
+                                src=`/uploads/${article.image}`
+                                alt=`Article ${article.title}`
+                                class="w-full"
+                            )
+                        div(class="p-3 text-left w-full")
+                            h3
+                                a(
+                                    href=`/articles/details/${article.id}`
+                                    class="text-dark hover:text-primary mb-2 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px] text-sky-500"
+                                )= article.title
+                        div(class="flex justify-center p-3 w-full flex-wrap")
+                            div(class="w-full")
+                                p(class="text-gray-500 font-bold") Created: 
+                                    span(class="text-black")= `${formatDates(article.createdAt)}`
+                            div(class="w-full")    
+                                p(class="text-gray-500 font-bold") Last update: 
+                                    span(class="text-black")= `${formatDates(article.updatedAt)}`
+                            div(class="w-full")
+                                p(class="text-gray-500 font-bold") By: 
+                                    span(class="text-black")= article.user.name
+    div(class="container mx-auto flex flex-wrap justify-center xl:justify-between py-2")
+        div(class="w-full max-w-[1400px] mx-auto flex flex-wrap")
+            div(class="w-full flex justify-center my-4")
+                h2(class="text-2xl uppercase font-extrabold text-sky-800") Popular Articles
+            div(class="w-full flex mt-3 flex-wrap justify-center lg:justify-between")
+                each article in popularArticles
+                    div(class="w-full md:w-1/2 lg:w-4/12 xl:w-3/12 flex rounded-lg shadow-md bg-white flex-wrap m-3")
+                        div(class="mb-3 w-full")
+                            img(
+                                src=`/uploads/${article.image}`
+                                alt=`Article ${article.title}`
+                                class="w-full"
+                            )
+                        div(class="p-3 text-left w-full")
+                            h3
+                                a(
+                                    href=`/articles/details/${article.id}`
+                                    class="text-dark hover:text-primary mb-2 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px] text-sky-500"
+                                )= article.title
+                        div(class="flex justify-center p-3 w-full flex-wrap")
+                            div(class="w-full")
+                                p(class="text-gray-500 font-bold") Created: 
+                                    span(class="text-black")= `${formatDates(article.createdAt)}`
+                            div(class="w-full")    
+                                p(class="text-gray-500 font-bold") Last update: 
+                                    span(class="text-black")= `${formatDates(article.updatedAt)}`
+                            div(class="w-full")
+                                p(class="text-gray-500 font-bold") By: 
+                                    span(class="text-black")= article.user.name

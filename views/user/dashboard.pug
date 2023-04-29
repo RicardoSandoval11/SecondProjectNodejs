@@ -1,0 +1,76 @@
+extends ../layout/public
+
+block content
+    div(class="m-2 text-center")
+        h1(class="font-extrabold uppercase text-xl") Dashboard
+    div(class="flex flex-wrap gap-2 justify-center animate__animated animate__fadeIn animate__faster")
+        div(class="flex flex-col w-full lg:basis-5/12 rounded-md shadow-md p-1 h-min")
+            div(class="m-2 text-center flex justify-between items-center")
+                h2(class="font-extrabold uppercase text-md") my Articles
+                a(
+                    class=" text-white font-bold p-2 bg-lime-400 hover:bg-lime-700"
+                    href="/articles/create"
+                ) Add a new article
+            div(class="m-2 text-center flex justify-between items-center flex-wrap")
+                if empty 
+                    h2(class="text-center font-bold text-xl m-5") You don't have articles yet 
+                else 
+                    each article in userArticles 
+                        div(class="my-2 p-2 w-full flex flex-wrap justify-between")
+                            div(class="w-full")
+                                h2(class="text-left font-extrabold text-lg text-sky-500")
+                                    a(href=`/articles/details/${article.id}`)= article.title
+                            div(class="w-full lg:basis-6/12 mt-3 flex justify-center lg:justify-start")
+                                img(class="w-8/12 md:w-6/12 lg:w-full" src=`/uploads/${article.image}` alt=`article ${article.title}`)
+                            div(class="h-10 w-auto 2xl:basis-5/12 mt-3 flex flex-wrap")
+                                div(class="w-full text-left")
+                                    span(class="font-extrabold") Created: 
+                                    span= `${formatDates(article.createdAt)}`
+                                div(class="w-full text-left")
+                                    span(class="font-extrabold") Updated: 
+                                    span= `${formatDates(article.updatedAt)}`
+                    div(class="w-full mt-3 flex justify-center")
+                        a(
+                            class="bg-sky-600 py-2 px-6 rounded text-white cursor-pointer hover:bg-sky-800"
+                            href='/articles/my-articles'
+                        ) All articles
+        div(class="flex flex-col w-full lg:basis-5/12 gap-2 rounded-md")
+            div(class="flex flex-col shadow-md rounded-md")
+                div(class="m-2 text-center")
+                    h2(class="font-extrabold uppercase text-md") Favorites
+                div(class="m-2 text-center flex justify-center items-center flex-wrap")
+                if emptyFavorites 
+                    h2(class="text-center font-bold text-xl m-5") You don't have favorites yet 
+                else 
+                    each favorite in favorites 
+                        div(class="my-2 p-2 w-full flex flex-wrap justify-between")
+                            div(class="w-6/12")
+                                h2(class="text-left font-extrabold text-lg text-sky-500")
+                                    a(href=`/articles/details/${favorite.article.id}`)= favorite.article.title
+                            div(class="w-full lg:basis-6/12 mt-3 flex justify-center lg:justify-start")
+                                img(class="w-8/12 md:w-6/12 lg:w-full" src=`/uploads/${favorite.article.image}` alt=`article ${favorite.article.title}`)
+                            div(class="h-10 w-auto 2xl:basis-5/12 mt-3 flex flex-wrap")
+                    div(class="w-full mt-3 flex justify-center")
+                        a(
+                            class="bg-sky-600 py-2 px-6 rounded text-white cursor-pointer hover:bg-sky-800"
+                            href='/favorites/my-favorites'
+                        ) All Favorites
+                div(class=" basis-full m-2 rounded-lg bg-slate-200")
+            div(class="flex flex-col shadow-md rounded-md")
+                div(class="m-2 text-center")
+                    h2(class="font-extrabold uppercase text-md") Information
+                a(
+                        class=" text-white font-bold p-2"
+                        href="/videogames/my-videogames"
+                    )
+                    div(class="basis-full p-2 flex justify-center bg-sky-400 hover:bg-sky-700 rounded") Videogames added
+                a(
+                        class=" text-white font-bold p-2"
+                        href="/user/update"
+                    )
+                    div(class="basis-full p-2 flex justify-center bg-slate-400 hover:bg-slate-700 rounded") Update information
+                a(
+                        class=" text-white font-bold p-2"
+                        href="/auth/logout"
+                    )
+                    div(class="basis-full p-2 flex justify-center bg-red-500 hover:bg-red-700 rounded") Logout

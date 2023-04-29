@@ -1,0 +1,75 @@
+extends ../layout/public
+
+block content
+    div(class="animate__animated animate__fadeIn animate__faster")
+        div(class="container mx-auto flex lg:justify-end justify-center max-w-[1400px] flex-wrap")
+            div(class="w-full lg:w-11/12 flex justify-center md:justify-start")
+                h1(class="text-2xl font-bold") 
+                    span(class="uppercase") Results for: 
+                    span= kword
+            div(class="w-full flex justify-center flex-wrap mt-6")
+                div(class="w-full")
+                    h2(class="uppercase text-xl font-bold text-center") Categories
+                div(class="w-full flex justify-center lg:justify-around mt-8 flex-wrap")
+                    if isCategories
+                        each category in categories 
+                            div(class="m-2 w-5/12 lg:w-2/12 transform hover:translate-y-[-7px] transition duration-300")
+                                a(
+                                    href=`/videogames/category/${category.id}`)
+                                    img(
+                                        class="rounded-full"
+                                        src= `/uploads/${category.cover_image}`
+                                        alt= category.title
+                                    )
+                                    div(class="w-full flex justify-center")
+                                        h3(class="font-bold text-sky-500")= category.title
+                    else 
+                        div(class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mx-auto my-6" role="alert")
+                            p(class="font-bold") No matches 
+                            p(class="text-sm")=`No Categories found for: ${kword}`
+                div(class="w-full flex justify-center")
+                    a(href=`/categories/all` class="text-blue-600 cursor-pointer hover:underline") All Categories
+            div(class="w-full flex justify-center flex-wrap mt-6")
+                div(class="w-full")
+                    h2(class="uppercase text-xl font-bold text-center") Videogames
+                div(class="w-full flex justify-center lg:justify-around mt-8")
+                    if isVideogames
+                        each videogame in videogames 
+                            div(class="m-2 w-5/12 lg:w-2/12 transform hover:translate-y-[-7px] transition duration-300")
+                                a(
+                                    href=`/articles/videogame/${videogame.id}`)
+                                    img(
+                                        class="rounded-full"
+                                        src= `/uploads/${videogame.image}`
+                                        alt= videogame.name
+                                    )
+                                    div(class="w-full flex justify-center")
+                                        h3(class="font-bold uppercase text-sky-500")= videogame.name
+                    else 
+                        div(class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mx-auto my-6" role="alert")
+                            p(class="font-bold") No matches 
+                            p(class="text-sm")=`No videogames found for: ${kword}`
+                div(class="w-full flex justify-center")
+                    a(href=`/videogames/all` class="text-blue-600 cursor-pointer hover:underline") All Videogames
+            div(class="w-full flex justify-center flex-wrap mt-6")
+                div(class="w-full")
+                    h2(class="uppercase text-xl font-bold text-center") Articles
+                div(class="w-full flex justify-center lg:justify-around mt-8")
+                    if isArticles
+                        each article in articles 
+                            div(class="m-2 w-5/12 lg:w-2/12 transform hover:translate-y-[-7px] transition duration-300")
+                                a(
+                                    href=`/articles/details/${article.id}`)
+                                    img(
+                                        class="rounded-md"
+                                        src= `/uploads/${article.image}`
+                                        alt= article.title
+                                    )
+                                    div(class="w-full flex justify-center mt-3")
+                                        h3(class="font-bold uppercase text-sky-500")= article.title
+                    else 
+                        div(class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mx-auto my-6" role="alert")
+                            p(class="font-bold") No matches 
+                            p(class="text-sm")=`No articles found for: ${kword}`
+                div(class="w-full flex justify-center mb-10")
+                    a(href=`/articles/all` class="text-blue-600 cursor-pointer hover:underline") All articles
