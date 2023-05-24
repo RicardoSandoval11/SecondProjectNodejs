@@ -67,7 +67,7 @@ const CreateAccount = async(request, response) => {
         newUser.password = password;
 
         if(request.file != null){
-            newUser.photo = request.file.fileName;
+            newUser.photo = request.file.filename;
         }else{
             newUser.photo = 'default.jpg';
         }

@@ -127,7 +127,8 @@ export const updateInformation = async(request, response) => {
 
     return response.render('generic/success',{
         page: 'Information updated',
-        message: 'Your information has been updated successfully'
+        message: 'Your information has been updated successfully',
+        user: request.user
     });
 
 
